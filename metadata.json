@@ -1,0 +1,6 @@
+{
+  "name": "Las Flamas - Menú Digital y Pedidos a la Brasa",
+  "description": "Catálogo interactivo y sistema de pedidos por WhatsApp para el restaurante de carnes, parrillas y comida rápida Las Flamas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
