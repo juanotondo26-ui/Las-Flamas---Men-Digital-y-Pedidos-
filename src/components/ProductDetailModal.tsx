@@ -91,13 +91,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <X className="w-5 h-5" />
           </button>
 
-          {/* Badge */}
-          {product.badge && (
-            <div className="absolute top-3 left-3 bg-[#E53935] text-white px-2.5 py-1 rounded-md text-xs font-bold uppercase shadow-md flex items-center gap-1 border border-white/10">
-              <Flame className="w-3 h-3 fill-white" />
-              <span>{product.badge}</span>
-            </div>
-          )}
 
           {/* Price Tag overlay */}
           <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">

@@ -7,6 +7,7 @@ export interface Category {
   name: string;
   emoji: string;
   shortDesc: string;
+  image: string;
   subcategories: string[];
 }
 

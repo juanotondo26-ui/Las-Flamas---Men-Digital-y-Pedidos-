@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Header } from './components/Header.tsx';
-import { HeroBanner } from './components/HeroBanner.tsx';
-import { CategoryNav } from './components/CategoryNav.tsx';
+import { FoodBanner } from './components/FoodBanner.tsx';
+import { CategoryGrid2Col } from './components/CategoryGrid2Col.tsx';
 import { ProductCard } from './components/ProductCard.tsx';
 import { ProductDetailModal } from './components/ProductDetailModal.tsx';
 import { CartDrawer } from './components/CartDrawer.tsx';
@@ -10,14 +10,14 @@ import { ReceiptModal } from './components/ReceiptModal.tsx';
 import { Footer } from './components/Footer.tsx';
 import { CATEGORIES, PRODUCTS, RESTAURANT_INFO } from './data/menuData.ts';
 import { Product, CartItem, DeliveryType, OrderDetails } from './types.ts';
-import { Flame, ShoppingBag, ArrowRight, Heart, Sparkles, Filter, Check, X } from 'lucide-react';
+import { Flame, ShoppingCart, ArrowRight, ArrowLeft, X, Layers } from 'lucide-react';
 
 export default function App() {
   // Navigation & Filtering States
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>(CATEGORIES[0].id);
+  // null = Main screen showing 2-column categories grid; string = Active category view with submenus & products
+  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('Todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [quickFilter, setQuickFilter] = useState<'all' | 'popular' | 'deals' | 'favorites'>('all');
 
   // Cart & Orders State
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -97,7 +97,7 @@ export default function App() {
     return map;
   }, []);
 
-  // Filtered products list
+  // Filtered products list when a category or search is active
   const filteredProducts = useMemo(() => {
     let list = PRODUCTS;
 
@@ -112,19 +112,12 @@ export default function App() {
       );
     }
 
-    // Quick filters
-    if (quickFilter === 'popular') {
-      return list.filter((p) => p.isPopular);
-    }
-    if (quickFilter === 'deals') {
-      return list.filter((p) => Boolean(p.originalPrice) || p.categoryId === 'combos');
-    }
-    if (quickFilter === 'favorites') {
-      return list.filter((p) => favorites.includes(p.id));
+    if (!activeCategoryId) {
+      return [];
     }
 
     // Category filter
-    list = list.filter((p) => p.categoryId === selectedCategoryId);
+    list = list.filter((p) => p.categoryId === activeCategoryId);
 
     // Subcategory filter
     if (selectedSubcategory !== 'Todos') {
@@ -132,12 +125,13 @@ export default function App() {
     }
 
     return list;
-  }, [searchQuery, quickFilter, selectedCategoryId, selectedSubcategory, favorites]);
+  }, [searchQuery, activeCategoryId, selectedSubcategory]);
 
-  // Featured combo for Hero banner
-  const featuredProduct = useMemo(() => {
-    return PRODUCTS.find((p) => p.id === 'cmb-1') || PRODUCTS[0];
-  }, []);
+  // Active Category Object
+  const currentCategory = useMemo(() => {
+    if (!activeCategoryId) return null;
+    return CATEGORIES.find((c) => c.id === activeCategoryId) || null;
+  }, [activeCategoryId]);
 
   // Add customized item to cart
   const handleAddCustomizedItem = (customItem: {
@@ -253,7 +247,16 @@ export default function App() {
     setPromoCode('');
   };
 
-  const activeCategory = CATEGORIES.find((c) => c.id === selectedCategoryId) || CATEGORIES[0];
+  const handleCategoryClick = (categoryId: string) => {
+    setActiveCategoryId(categoryId);
+    setSelectedSubcategory('Todos');
+    window.scrollTo({ top: 120, behavior: 'smooth' });
+  };
+
+  const handleBackToCategories = () => {
+    setActiveCategoryId(null);
+    setSelectedSubcategory('Todos');
+  };
 
   return (
     <div className="min-h-screen bg-[#121212] text-[#E0E0E0] flex flex-col selection:bg-[#E53935] selection:text-white">
@@ -264,177 +267,133 @@ export default function App() {
           <span>{toastMessage}</span>
           <button
             onClick={() => setToastMessage(null)}
-            className="ml-2 text-stone-400 hover:text-white"
+            className="ml-2 text-stone-400 hover:text-white cursor-pointer"
           >
             <X className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
 
-      {/* 1. Header */}
+      {/* 1. Header with Las Flamas Title & ShoppingCart Isotipo */}
       <Header
         cartItemCount={cartItemCount}
         cartTotal={cartSubtotal}
         onOpenCart={() => setIsCartOpen(true)}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        activeCategoryName={activeCategory.name}
+        activeCategoryName={currentCategory ? currentCategory.name : 'Menú Principal'}
       />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        {/* 2. Promotional Hero Banner */}
-        {!searchQuery && quickFilter === 'all' && (
-          <HeroBanner
-            featuredProduct={featuredProduct}
-            onOrderNow={() => {
-              handleQuickAdd(featuredProduct);
-              setIsCartOpen(true);
-            }}
-            onExploreMenu={() => {
-              const el = document.getElementById('catalogo-flamas');
-              el?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          />
+        {/* 2. Banner grande con foto de comida llamativa (después del título de Las Flamas) */}
+        {!searchQuery && (
+          <FoodBanner />
         )}
 
-        {/* Catalog Section Anchor */}
-        <div id="catalogo-flamas" className="space-y-4">
-          {/* Quick Filters Row (Todos / Populares / Ofertas / Favoritos) */}
-          <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar pb-1">
-            <div className="flex items-center gap-1.5 p-1 bg-[#1A1A1A] rounded-xl border border-[#262626]">
-              <button
-                onClick={() => {
-                  setQuickFilter('all');
-                  setSearchQuery('');
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  quickFilter === 'all' && !searchQuery
-                    ? 'bg-[#E53935] text-white shadow-sm'
-                    : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                Menú Completo
-              </button>
-              <button
-                onClick={() => {
-                  setQuickFilter('popular');
-                  setSearchQuery('');
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 ${
-                  quickFilter === 'popular'
-                    ? 'bg-[#E53935] text-white shadow-sm'
-                    : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                <Sparkles className="w-3 h-3 text-[#FFC107]" />
-                Más Vendidos
-              </button>
-              <button
-                onClick={() => {
-                  setQuickFilter('deals');
-                  setSearchQuery('');
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 ${
-                  quickFilter === 'deals'
-                    ? 'bg-[#E53935] text-white shadow-sm'
-                    : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                <Flame className="w-3 h-3 text-amber-500" />
-                Combos & Promos
-              </button>
-              <button
-                onClick={() => {
-                  setQuickFilter('favorites');
-                  setSearchQuery('');
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 ${
-                  quickFilter === 'favorites'
-                    ? 'bg-[#E53935] text-white shadow-sm'
-                    : 'text-stone-400 hover:text-white'
-                }`}
-              >
-                <Heart className="w-3 h-3 text-red-400 fill-red-400" />
-                Favoritos ({favorites.length})
-              </button>
-            </div>
-
-            {searchQuery && (
+        {/* Search Results View */}
+        {searchQuery ? (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-3 rounded-2xl bg-[#1A1A1A] border border-[#2E2E2E]">
+              <span className="text-xs sm:text-sm text-stone-300">
+                Resultados para: <strong className="text-white font-bold">"{searchQuery}"</strong> ({filteredProducts.length})
+              </span>
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-xs text-[#FFC107] hover:underline flex items-center gap-1 shrink-0"
+                className="text-xs text-[#FFC107] hover:underline flex items-center gap-1 cursor-pointer font-semibold"
               >
-                <span>Limpiar búsqueda "{searchQuery}"</span>
-                <X className="w-3.5 h-3.5" />
+                <span>Cerrar búsqueda</span>
+                <X className="w-4 h-4" />
               </button>
+            </div>
+
+            {filteredProducts.length === 0 ? (
+              <div className="bg-[#1A1A1A] rounded-2xl border border-[#282828] p-10 text-center space-y-3">
+                <Flame className="w-8 h-8 text-[#E53935] mx-auto animate-pulse" />
+                <h3 className="text-base font-bold text-white font-['Outfit']">
+                  No se encontraron platos
+                </h3>
+                <p className="text-xs text-stone-400">
+                  Intenta con otro término como hamburguesas, costillas, alitas o bebidas.
+                </p>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="px-4 py-2 bg-[#E53935] text-white text-xs font-bold rounded-xl"
+                >
+                  Ver Menú
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+                {filteredProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={(p, e) => handleQuickAdd(p, e)}
+                    onOpenDetail={(p) => setDetailProduct(p)}
+                    isFavorite={favorites.includes(product.id)}
+                    onToggleFavorite={toggleFavorite}
+                  />
+                ))}
+              </div>
             )}
           </div>
+        ) : activeCategoryId === null ? (
+          /* 3. Pantalla Principal: SOLO LAS CATEGORÍAS EN 2 COLUMNAS (Sin submenús) */
+          <CategoryGrid2Col
+            categories={CATEGORIES}
+            onSelectCategory={handleCategoryClick}
+            productCounts={productCounts}
+          />
+        ) : (
+          /* 4. Vista de Categoría Activa: Se activan los submenús y platos al hacer clic */
+          <div className="space-y-4 animate-in fade-in duration-200">
+            {/* Navigation Bar to Return to Categories */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#1A1A1A] p-3 sm:p-4 rounded-2xl border border-[#2B2B2B]">
+              <div className="flex items-center gap-2.5">
+                <button
+                  onClick={handleBackToCategories}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#242424] hover:bg-[#303030] text-stone-200 hover:text-white text-xs font-bold border border-stone-700 transition-all cursor-pointer shadow-sm active:scale-95"
+                >
+                  <ArrowLeft className="w-4 h-4 text-[#FFC107]" />
+                  <span>Volver a Categorías</span>
+                </button>
 
-          {/* 3. Navigation by Categories (10 interactive buttons) */}
-          {!searchQuery && quickFilter === 'all' && (
-            <CategoryNav
-              categories={CATEGORIES}
-              selectedCategoryId={selectedCategoryId}
-              onSelectCategory={setSelectedCategoryId}
-              selectedSubcategory={selectedSubcategory}
-              onSelectSubcategory={setSelectedSubcategory}
-              productCounts={productCounts}
-            />
-          )}
+                <div className="h-5 w-[1px] bg-stone-700 hidden sm:block" />
 
-          {/* Category Title & Summary */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2">
-            <div>
-              <h2 className="text-xl sm:text-2xl font-black text-white font-['Outfit'] flex items-center gap-2">
-                <span>
-                  {searchQuery
-                    ? `Resultados para "${searchQuery}"`
-                    : quickFilter === 'popular'
-                    ? 'Platos Más Populares y Recomendados'
-                    : quickFilter === 'deals'
-                    ? 'Promociones y Combos Especiales'
-                    : quickFilter === 'favorites'
-                    ? 'Tus Platos Favoritos Guardados'
-                    : `${activeCategory.emoji} ${activeCategory.name}`}
-                </span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#1F1F1F] text-[#FFC107] font-mono tabular-nums font-semibold border border-[#2E2E2E]">
-                  {filteredProducts.length}
-                </span>
-              </h2>
-              {!searchQuery && quickFilter === 'all' && (
-                <p className="text-xs text-stone-400 mt-0.5">
-                  {activeCategory.shortDesc}
-                </p>
+                <h2 className="text-base sm:text-xl font-black text-white font-['Outfit'] flex items-center gap-1.5 truncate">
+                  <span>{currentCategory?.name}</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-black/40 text-[#FFC107] font-mono tabular-nums border border-white/10">
+                    {filteredProducts.length}
+                  </span>
+                </h2>
+              </div>
+
+              {/* Submenus interactive chips (solo activos al ingresar a la categoría) */}
+              {currentCategory && currentCategory.subcategories.length > 0 && (
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth">
+                  {currentCategory.subcategories.map((sub) => {
+                    const isSubActive = selectedSubcategory === sub;
+                    return (
+                      <button
+                        key={sub}
+                        onClick={() => setSelectedSubcategory(sub)}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all whitespace-nowrap cursor-pointer border ${
+                          isSubActive
+                            ? 'bg-[#E53935] text-white border-[#FF6859]/50 font-bold shadow-md shadow-[#E53935]/25'
+                            : 'bg-[#141414] text-stone-400 hover:text-stone-200 hover:bg-[#202020] border-[#262626]'
+                        }`}
+                      >
+                        {sub}
+                      </button>
+                    );
+                  })}
+                </div>
               )}
             </div>
-          </div>
 
-          {/* 4. Product Bento Grid (2 columns mobile, 3-4 columns desktop) */}
-          {filteredProducts.length === 0 ? (
-            <div className="bg-[#1A1A1A] rounded-2xl border border-[#282828] p-10 text-center space-y-3 my-6">
-              <div className="w-14 h-14 rounded-full bg-[#242424] flex items-center justify-center mx-auto text-stone-500">
-                <Flame className="w-7 h-7 text-stone-600" />
-              </div>
-              <h3 className="text-base font-bold text-white font-['Outfit']">
-                No encontramos platos en esta sección
-              </h3>
-              <p className="text-xs text-stone-400 max-w-sm mx-auto">
-                Prueba buscando otro término o seleccionando otra categoría del menú.
-              </p>
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setQuickFilter('all');
-                  setSelectedSubcategory('Todos');
-                }}
-                className="px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-bold rounded-xl transition-all cursor-pointer"
-              >
-                Restablecer Filtros
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 pt-2">
+            {/* Product Grid of the Selected Category */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -446,11 +405,11 @@ export default function App() {
                 />
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </main>
 
-      {/* 5. Floating Bottom Bar (Fixed at the bottom of the viewport when items in cart) */}
+      {/* Floating Bottom Bar (Fixed at bottom when cart has items) */}
       {cartItemCount > 0 && (
         <div className="fixed bottom-0 inset-x-0 z-40 p-3 sm:p-4 bg-gradient-to-t from-black via-black/95 to-transparent pointer-events-none">
           <div className="max-w-2xl mx-auto pointer-events-auto">
@@ -461,7 +420,7 @@ export default function App() {
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-black/30 backdrop-blur-sm flex items-center justify-center">
-                    <ShoppingBag className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
+                    <ShoppingCart className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
                   </div>
                   <span className="absolute -top-1.5 -right-1.5 bg-[#FFC107] text-black font-extrabold text-[11px] w-5 h-5 rounded-full flex items-center justify-center border border-black shadow">
                     {cartItemCount}

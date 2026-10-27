@@ -1,11 +1,11 @@
 import React from 'react';
-import { Flame, Clock, MapPin, Phone, ShieldCheck, Heart, QrCode, CreditCard, Banknote } from 'lucide-react';
+import { Flame, Clock, MapPin, Phone } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/menuData.ts';
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-[#0D0D0D] border-t border-[#222222] pt-10 pb-24 sm:pb-12 text-stone-400 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         {/* Brand Col */}
         <div className="space-y-3">
           <div className="flex items-center gap-3">
@@ -50,50 +50,30 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Location & Delivery */}
+        {/* Location & Contact */}
         <div className="space-y-2">
           <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5 text-[#E53935]" />
-            Ubicación & Delivery
+            Ubicación & Contacto
           </h4>
-          <p className="text-stone-300">
-            {RESTAURANT_INFO.address}
-          </p>
-          <p className="text-stone-400">
-            Cobertura rápida de entregas en 35 a 45 minutos en caja térmica.
-          </p>
+          <a
+            href="https://maps.google.com/?q=Av.+Las+Am%C3%A9ricas+131"
+            target="_blank"
+            rel="noreferrer"
+            className="text-stone-200 hover:text-[#FFC107] font-medium flex items-center gap-1.5 transition-colors underline decoration-stone-600 hover:decoration-[#FFC107]"
+            title="Ver en Google Maps"
+          >
+            <span>Av. Las Américas 131</span>
+          </a>
           <div className="pt-1">
             <a
-              href={`https://wa.me/${RESTAURANT_INFO.whatsappNumber.replace(/[^0-9]/g, '')}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-[#25D366] font-semibold hover:underline"
+              href="tel:72877666"
+              className="inline-flex items-center gap-1.5 text-[#25D366] hover:text-[#2bf578] font-bold text-xs transition-colors"
+              title="Llamar al 72877666"
             >
-              <Phone className="w-3 h-3" />
-              WhatsApp: {RESTAURANT_INFO.whatsappDisplay}
+              <Phone className="w-3.5 h-3.5" />
+              <span>Celular: 72877666</span>
             </a>
-          </div>
-        </div>
-
-        {/* Methods & Guarantees */}
-        <div className="space-y-2">
-          <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#FFC107]" />
-            Medios de Pago Aceptados
-          </h4>
-          <div className="flex flex-wrap gap-2 pt-1 text-[11px]">
-            <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1A1A1A] border border-[#2A2A2A] text-stone-200">
-              <Banknote className="w-3.5 h-3.5 text-emerald-400" />
-              Efectivo
-            </span>
-            <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1A1A1A] border border-[#2A2A2A] text-stone-200">
-              <QrCode className="w-3.5 h-3.5 text-cyan-400" />
-              QR Simple
-            </span>
-            <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1A1A1A] border border-[#2A2A2A] text-stone-200">
-              <CreditCard className="w-3.5 h-3.5 text-amber-400" />
-              Tarjetas Débito / Crédito
-            </span>
           </div>
         </div>
       </div>

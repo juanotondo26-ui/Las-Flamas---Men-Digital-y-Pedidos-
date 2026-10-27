@@ -57,15 +57,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Ambient Gradient Shadow */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-black/30 pointer-events-none" />
 
-        {/* Badge in top-left */}
-        {product.badge && (
-          <div className="absolute top-2 left-2 max-w-[80%]">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#E53935]/90 backdrop-blur-sm text-white text-[10px] font-extrabold uppercase tracking-tight shadow-md border border-white/10 truncate">
-              <Flame className="w-2.5 h-2.5 fill-white shrink-0" />
-              <span className="truncate">{product.badge}</span>
-            </span>
-          </div>
-        )}
 
         {/* Favorite Heart Button top-right */}
         <button

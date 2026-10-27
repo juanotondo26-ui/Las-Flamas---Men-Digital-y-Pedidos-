@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Search, X, Flame, Clock, Phone, MapPin } from 'lucide-react';
+import { ShoppingCart, Search, X, Flame, Clock, Phone, MapPin } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/menuData.ts';
 
 interface HeaderProps {
@@ -22,35 +22,12 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-[#121212]/95 backdrop-blur-md border-b border-[#262626] transition-all">
       {/* Top micro-bar for trust & hours */}
-      <div className="bg-[#1A1A1A] border-b border-[#262626] py-1 px-4 text-xs text-stone-400">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 overflow-x-auto no-scrollbar whitespace-nowrap">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 text-[#FFC107] font-semibold">
-              <Flame className="w-3.5 h-3.5 text-[#E53935] fill-[#E53935]" />
-              Brasas Encendidas
-            </span>
-            <span className="text-stone-600">·</span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3 text-stone-400" />
-              12:00 PM - 11:30 PM
-            </span>
-            <span className="text-stone-600 hidden sm:inline">·</span>
-            <span className="hidden sm:inline text-stone-400">
-              Delivery: <span className="text-stone-200 font-medium">{RESTAURANT_INFO.deliveryTime}</span>
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-stone-400">
-            <a
-              href={`https://wa.me/${RESTAURANT_INFO.whatsappNumber.replace('+', '')}`}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1 hover:text-[#FFC107] transition-colors"
-            >
-              <Phone className="w-3 h-3 text-[#25D366]" />
-              <span className="hidden md:inline">WhatsApp Pedidos:</span>
-              <span className="text-stone-300 font-medium">{RESTAURANT_INFO.whatsappDisplay}</span>
-            </a>
-          </div>
+      <div className="bg-[#1A1A1A] border-b border-[#262626] py-1.5 px-4 text-xs">
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          <span className="flex items-center gap-1.5 text-[#FFC107] font-semibold tracking-wide text-xs">
+            <Flame className="w-3.5 h-3.5 text-[#E53935] fill-[#E53935]" />
+            Flamas encendidas de 12:00 PM a 11:00 PM
+          </span>
         </div>
       </div>
 
@@ -83,9 +60,31 @@ export const Header: React.FC<HeaderProps> = ({
                 Parrillas & Grill
               </span>
             </div>
-            <p className="text-[11px] sm:text-xs text-stone-400 font-medium truncate max-w-[190px] sm:max-w-none">
+            <p className="text-[11px] sm:text-xs text-stone-400 font-medium">
               {RESTAURANT_INFO.slogan}
             </p>
+            {/* Interactive Address & Cellphone under Slogan */}
+            <div className="flex flex-col xs:flex-row xs:items-center gap-0.5 xs:gap-3 mt-0.5">
+              <a
+                href="https://maps.google.com/?q=Av.+Las+Am%C3%A9ricas+131"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 text-[10px] sm:text-[11px] text-stone-300 hover:text-[#FFC107] transition-colors"
+                title="Abrir ubicación en Google Maps"
+              >
+                <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E53935] shrink-0" />
+                <span className="underline decoration-stone-600 hover:decoration-[#FFC107] underline-offset-2">Av. Las Américas 131</span>
+              </a>
+              <span className="text-stone-600 hidden xs:inline">·</span>
+              <a
+                href="tel:72877666"
+                className="flex items-center gap-1 text-[10px] sm:text-[11px] text-[#25D366] hover:text-[#2bf578] font-bold transition-colors"
+                title="Llamar o contactar al 72877666"
+              >
+                <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
+                <span>72877666</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -110,7 +109,7 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {/* Right Actions: Cart Button */}
+        {/* Right Actions: Cart Button with Shopping Cart Icon */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             onClick={onOpenCart}
@@ -118,7 +117,7 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Abrir carrito de compras"
           >
             <div className="relative">
-              <ShoppingBag className="w-5 h-5 text-white" />
+              <ShoppingCart className="w-5 h-5 text-white" />
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#FFC107] text-[#121212] font-extrabold text-[11px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#121212] shadow-sm tabular-nums animate-bounce">
                   {cartItemCount}

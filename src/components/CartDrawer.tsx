@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Check, Sparkles, AlertCircle } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingCart, ArrowRight, Tag, Check, Sparkles, AlertCircle } from 'lucide-react';
 import { CartItem, DeliveryType } from '../types.ts';
 import { RESTAURANT_INFO } from '../data/menuData.ts';
 
@@ -65,7 +65,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           <div className="p-4 sm:p-5 border-b border-[#242424] flex items-center justify-between bg-[#1A1A1A]">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#E53935] to-[#B71C1C] flex items-center justify-center text-white shadow-md">
-                <ShoppingBag className="w-4 h-4" />
+                <ShoppingCart className="w-4 h-4" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-white font-['Outfit']">
@@ -141,7 +141,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             {items.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-12 px-4 space-y-3">
                 <div className="w-16 h-16 rounded-2xl bg-[#202020] border border-[#2E2E2E] flex items-center justify-center text-stone-500">
-                  <ShoppingBag className="w-8 h-8 text-stone-600" />
+                  <ShoppingCart className="w-8 h-8 text-stone-600" />
                 </div>
                 <h3 className="text-base font-bold text-white font-['Outfit']">
                   Tu carrito está vacío

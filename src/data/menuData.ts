@@ -5,9 +5,9 @@ export const RESTAURANT_INFO = {
   slogan: "Siente el calor, saborea la pasión",
   logo: "/assets/aistudio/logo_a3acb46e.jpg",
   heroImage: "/src/assets/images/hero_combo_flamas_familiar_1793062336542.jpg",
-  whatsappNumber: "+59170012345",
-  whatsappDisplay: "+591 700-12345",
-  address: "Av. Las Brasas #450 esq. Fuego Central",
+  whatsappNumber: "+59172877666",
+  whatsappDisplay: "72877666",
+  address: "Av. Las Américas 131",
   city: "Santa Cruz / La Paz",
   schedule: "Martes a Domingo: 12:00 PM - 11:30 PM (Lunes cerrado por brasas)",
   deliveryTime: "35 - 45 min",
@@ -44,6 +44,7 @@ export const CATEGORIES: Category[] = [
     name: "Almuerzo Familiar",
     emoji: "🍲",
     shortDesc: "Platos grandes para compartir en familia y amigos",
+    image: "/src/assets/images/hero_combo_flamas_familiar_1793062336542.jpg",
     subcategories: ["Todos", "Parrilladas", "Platos Típicos", "A la Brasa"],
   },
   {
@@ -51,6 +52,7 @@ export const CATEGORIES: Category[] = [
     name: "Platos Extras",
     emoji: "🍟",
     shortDesc: "Papas rústicas, yucas fritas, aros de cebolla y ensaladas",
+    image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?w=500&auto=format&fit=crop&q=80",
     subcategories: ["Todos", "Papas & Yucas", "Aperitivos", "Ensaladas"],
   },
   {
@@ -58,6 +60,7 @@ export const CATEGORIES: Category[] = [
     name: "Hamburguesas",
     emoji: "🍔",
     shortDesc: "Hamburguesas artesanas a la parrilla con queso fundido y tocino",
+    image: "/src/assets/images/hamburguesa_flamas_artesanal_1793062337268.jpg",
     subcategories: ["Todos", "Monster Doble", "Clásicas", "Pollo Crispy"],
   },
   {
@@ -65,6 +68,7 @@ export const CATEGORIES: Category[] = [
     name: "Alitas",
     emoji: "🍗",
     shortDesc: "Alitas BBQ, picantes, miel y mostaza, parmesano crocante",
+    image: "/src/assets/images/alitas_fuego_parrilla_1793062338356.jpg",
     subcategories: ["Todos", "BBQ Ahumada", "Fuego Picante", "Miel & Mostaza", "Parmesano"],
   },
   {
@@ -72,6 +76,7 @@ export const CATEGORIES: Category[] = [
     name: "Costillas",
     emoji: "🍖",
     shortDesc: "Costillitas de cerdo tiernas bañadas en salsa barbacoa a la leña",
+    image: "/src/assets/images/costillas_bbq_lena_1793062337065.jpg",
     subcategories: ["Todos", "Costillas BBQ", "Miel & Bourbon", "Al Chimichurri"],
   },
   {
@@ -79,6 +84,7 @@ export const CATEGORIES: Category[] = [
     name: "Milanesas Premium",
     emoji: "🥩",
     shortDesc: "Milanesas gratinadas napolitanas y cuadril crispy",
+    image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=500&auto=format&fit=crop&q=80",
     subcategories: ["Todos", "Napolitanas", "A Caballo", "Cuadril Crispy"],
   },
   {
@@ -86,6 +92,7 @@ export const CATEGORIES: Category[] = [
     name: "Conos",
     emoji: "🍦",
     shortDesc: "Conos de papas crujientes con toppings de salchicha y queso",
+    image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=500&auto=format&fit=crop&q=80",
     subcategories: ["Todos", "Salchipapa", "Pollo Popcorn", "Alitas Cono"],
   },
   {
@@ -93,6 +100,7 @@ export const CATEGORIES: Category[] = [
     name: "Bowl",
     emoji: "🥣",
     shortDesc: "Bowls saludables y bowls carnívoros con arroz sazonado",
+    image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=500&auto=format&fit=crop&q=80",
     subcategories: ["Todos", "Carnívoro", "Pollo Parrillero", "Pulled Pork"],
   },
   {
@@ -100,6 +108,7 @@ export const CATEGORIES: Category[] = [
     name: "Combos",
     emoji: "💥",
     shortDesc: "Paquetes especiales con descuento y bebida incluida",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&auto=format&fit=crop&q=80",
     subcategories: ["Todos", "Familiar", "Dúos", "Festín Brasa"],
   },
   {
@@ -107,6 +116,7 @@ export const CATEGORIES: Category[] = [
     name: "Cervezas y Bebidas",
     emoji: "🍺",
     shortDesc: "Cervezas artesanales frías, gaseosas y refrescos naturales",
+    image: "https://images.unsplash.com/photo-1608270119864-469b6b72a088?w=500&auto=format&fit=crop&q=80",
     subcategories: ["Todos", "Cervezas", "Refrescos Caseros", "Gaseosas"],
   },
 ];
