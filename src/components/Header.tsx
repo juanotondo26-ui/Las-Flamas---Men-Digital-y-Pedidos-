@@ -53,35 +53,35 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-lg sm:text-2xl tracking-tight text-white font-['Outfit']">
+              <span className="font-extrabold text-xl sm:text-2xl tracking-tight text-white font-['Outfit']">
                 {RESTAURANT_INFO.name}
               </span>
-              <span className="text-xs px-1.5 py-0.5 rounded bg-[#E53935]/20 text-[#FF6859] font-medium border border-[#E53935]/30 hidden xs:inline">
+              <span className="text-xs px-2 py-0.5 rounded bg-[#E53935]/20 text-[#FF6859] font-semibold border border-[#E53935]/30 hidden xs:inline">
                 Parrillas & Grill
               </span>
             </div>
-            <p className="text-[11px] sm:text-xs text-stone-400 font-medium">
+            <p className="text-xs sm:text-sm text-stone-300 font-medium">
               {RESTAURANT_INFO.slogan}
             </p>
             {/* Interactive Address & Cellphone under Slogan */}
-            <div className="flex flex-col xs:flex-row xs:items-center gap-0.5 xs:gap-3 mt-0.5">
+            <div className="flex flex-col xs:flex-row xs:items-center gap-1 xs:gap-3 mt-1">
               <a
                 href="https://maps.google.com/?q=Av.+Las+Am%C3%A9ricas+131"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1 text-[10px] sm:text-[11px] text-stone-300 hover:text-[#FFC107] transition-colors"
+                className="flex items-center gap-1.5 text-xs text-stone-200 hover:text-[#FFC107] font-semibold transition-colors"
                 title="Abrir ubicación en Google Maps"
               >
-                <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E53935] shrink-0" />
-                <span className="underline decoration-stone-600 hover:decoration-[#FFC107] underline-offset-2">Av. Las Américas 131</span>
+                <MapPin className="w-3.5 h-3.5 text-[#E53935] shrink-0" />
+                <span className="underline decoration-stone-500 hover:decoration-[#FFC107] underline-offset-2">Av. Las Américas 131</span>
               </a>
-              <span className="text-stone-600 hidden xs:inline">·</span>
+              <span className="text-stone-500 hidden xs:inline">·</span>
               <a
                 href="tel:72877666"
-                className="flex items-center gap-1 text-[10px] sm:text-[11px] text-[#25D366] hover:text-[#2bf578] font-bold transition-colors"
+                className="flex items-center gap-1.5 text-xs text-[#25D366] hover:text-[#2bf578] font-bold transition-colors"
                 title="Llamar o contactar al 72877666"
               >
-                <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
+                <Phone className="w-3.5 h-3.5 shrink-0" />
                 <span>72877666</span>
               </a>
             </div>

@@ -84,46 +84,46 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between space-y-2.5">
         <div>
           {/* Metadata Row: Portions or Rating */}
-          <div className="flex items-center justify-between text-[11px] text-stone-400 mb-1">
-            <span className="text-amber-500/90 font-medium truncate">
+          <div className="flex items-center justify-between text-xs text-stone-300 mb-1.5">
+            <span className="text-[#FF9800] font-semibold truncate tracking-wide">
               {product.subcategory}
             </span>
             {product.rating && (
-              <span className="flex items-center gap-0.5 text-stone-300 font-medium">
-                <Star className="w-3 h-3 text-[#FFC107] fill-[#FFC107]" />
+              <span className="flex items-center gap-1 text-stone-200 font-semibold">
+                <Star className="w-3.5 h-3.5 text-[#FFC107] fill-[#FFC107]" />
                 <span className="tabular-nums">{product.rating}</span>
               </span>
             )}
           </div>
 
           {/* Dish Name */}
-          <h3 className="font-bold text-sm sm:text-base text-white tracking-tight leading-snug line-clamp-2 group-hover:text-[#FFC107] transition-colors font-['Outfit']">
+          <h3 className="font-extrabold text-base sm:text-lg text-white tracking-tight leading-snug line-clamp-2 group-hover:text-[#FFC107] transition-colors font-['Outfit']">
             {product.name}
           </h3>
 
           {/* Short Ingredients / Sides Description */}
-          <p className="text-[11px] sm:text-xs text-stone-400 line-clamp-2 leading-relaxed mt-1">
+          <p className="text-xs sm:text-sm text-stone-300 line-clamp-2 leading-relaxed mt-1 font-normal">
             {product.description}
           </p>
         </div>
 
         {/* Price & Add to Cart Row */}
-        <div className="pt-2 border-t border-[#262626] flex items-center justify-between gap-2">
+        <div className="pt-2.5 border-t border-[#262626] flex items-center justify-between gap-2">
           {/* Price */}
           <div className="flex flex-col">
             <div className="flex items-baseline gap-1.5">
-              <span className="text-base sm:text-lg font-extrabold text-[#FFC107] tabular-nums font-['Outfit']">
+              <span className="text-lg sm:text-xl font-black text-[#FFC107] tabular-nums font-['Outfit']">
                 {RESTAURANT_INFO.currency} {product.price.toFixed(2)}
               </span>
               {product.originalPrice && (
-                <span className="text-[11px] sm:text-xs line-through text-stone-400 tabular-nums">
+                <span className="text-xs line-through text-stone-400 tabular-nums">
                   {RESTAURANT_INFO.currency} {product.originalPrice.toFixed(2)}
                 </span>
               )}
             </div>
             {product.portions && (
-              <span className="text-[10px] text-stone-400 flex items-center gap-0.5">
-                <Users className="w-2.5 h-2.5" />
+              <span className="text-xs text-stone-400 flex items-center gap-1 font-medium">
+                <Users className="w-3 h-3 text-stone-400" />
                 {product.portions}
               </span>
             )}

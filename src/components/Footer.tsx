@@ -4,12 +4,12 @@ import { RESTAURANT_INFO } from '../data/menuData.ts';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#0D0D0D] border-t border-[#222222] pt-10 pb-24 sm:pb-12 text-stone-400 text-xs">
+    <footer className="bg-[#0D0D0D] border-t border-[#222222] pt-10 pb-24 sm:pb-12 text-stone-300 text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         {/* Brand Col */}
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#FFC107] bg-black shrink-0">
+            <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[#FFC107] bg-black shrink-0">
               <img
                 src={RESTAURANT_INFO.logo}
                 alt={RESTAURANT_INFO.name}
@@ -20,15 +20,15 @@ export const Footer: React.FC = () => {
               />
             </div>
             <div>
-              <span className="text-lg font-black text-white font-['Outfit'] block">
+              <span className="text-xl font-black text-white font-['Outfit'] block">
                 {RESTAURANT_INFO.name}
               </span>
-              <span className="text-[11px] text-[#FFC107] font-semibold">
+              <span className="text-xs text-[#FFC107] font-semibold">
                 Carnes, Parrillas y Alitas
               </span>
             </div>
           </div>
-          <p className="text-stone-400 text-xs leading-relaxed">
+          <p className="text-stone-300 text-xs sm:text-sm leading-relaxed">
             {RESTAURANT_INFO.slogan}. Pasión por el asado a fuego vivo con carbón de quebracho y salsas exclusivas preparadas a mano.
           </p>
         </div>
@@ -78,13 +78,13 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-[#1C1C1C] flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-500 text-[11px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-[#1C1C1C] flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-400 text-xs">
         <div>
           © {new Date().getFullYear()} {RESTAURANT_INFO.name}. Todos los derechos reservados.
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <span>Hecho con</span>
-          <Flame className="w-3 h-3 text-[#E53935] fill-[#E53935]" />
+          <Flame className="w-3.5 h-3.5 text-[#E53935] fill-[#E53935]" />
           <span>y brasas para amantes del buen comer</span>
         </div>
       </div>

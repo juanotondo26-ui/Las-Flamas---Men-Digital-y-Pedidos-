@@ -60,19 +60,19 @@ export const CategoryGrid2Col: React.FC<CategoryGrid2ColProps> = ({
               </div>
 
               {/* Title & Info */}
-              <div className="p-3 sm:p-4 flex flex-col justify-between flex-1">
+              <div className="p-3.5 sm:p-4 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="font-extrabold text-sm sm:text-base text-white font-['Outfit'] tracking-tight group-hover:text-[#FFC107] transition-colors line-clamp-1 leading-snug">
+                  <h3 className="font-extrabold text-base sm:text-lg text-white font-['Outfit'] tracking-tight group-hover:text-[#FFC107] transition-colors line-clamp-1 leading-snug">
                     {category.name}
                   </h3>
-                  <p className="text-[11px] text-stone-400 mt-0.5 font-medium">
+                  <p className="text-xs text-stone-300 mt-1 font-medium">
                     {totalPlates} {totalPlates === 1 ? 'plato disponible' : 'platos disponibles'}
                   </p>
                 </div>
 
-                <div className="pt-2 mt-2 border-t border-[#262626] flex items-center justify-between text-[11px] text-stone-400 group-hover:text-stone-300">
-                  <span>Explorar menú</span>
-                  <span className="text-[#E53935] font-bold">Ver →</span>
+                <div className="pt-2.5 mt-2.5 border-t border-[#262626] flex items-center justify-between text-xs text-stone-300 group-hover:text-white">
+                  <span className="font-medium">Explorar menú</span>
+                  <span className="text-[#FFC107] group-hover:text-[#FF6859] font-bold text-xs">Ver platos →</span>
                 </div>
               </div>
             </button>

@@ -427,10 +427,10 @@ export default function App() {
                   </span>
                 </div>
                 <div className="text-left">
-                  <span className="text-xs sm:text-sm font-bold tracking-tight block">
+                  <span className="text-sm sm:text-base font-extrabold tracking-tight block">
                     Ver Mi Pedido ({cartItemCount} {cartItemCount === 1 ? 'ítem' : 'ítems'})
                   </span>
-                  <span className="text-[11px] text-white/80 font-normal">
+                  <span className="text-xs text-white/90 font-medium">
                     {deliveryType === 'delivery' ? '🛵 Con entrega rápida' : '🏬 Listo para retirar'}
                   </span>
                 </div>
@@ -438,8 +438,8 @@ export default function App() {
 
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="text-right">
-                  <span className="text-[10px] text-white/80 uppercase font-medium block">Total</span>
-                  <span className="text-base sm:text-lg font-black text-[#FFC107] tabular-nums font-['Outfit']">
+                  <span className="text-xs text-white/90 uppercase font-bold block">Total</span>
+                  <span className="text-lg sm:text-xl font-black text-[#FFC107] tabular-nums font-['Outfit']">
                     {RESTAURANT_INFO.currency} {grandTotal.toFixed(2)}
                   </span>
                 </div>

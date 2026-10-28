@@ -44,7 +44,7 @@ export const CATEGORIES: Category[] = [
     name: "Almuerzo Familiar",
     emoji: "🍲",
     shortDesc: "Platos grandes para compartir en familia y amigos",
-    image: "/src/assets/images/hero_combo_flamas_familiar_1793062336542.jpg",
+    image: "/2.png",
     subcategories: ["Todos", "Parrilladas", "Platos Típicos", "A la Brasa"],
   },
   {
@@ -52,7 +52,7 @@ export const CATEGORIES: Category[] = [
     name: "Platos Extras",
     emoji: "🍟",
     shortDesc: "Papas rústicas, yucas fritas, aros de cebolla y ensaladas",
-    image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?w=500&auto=format&fit=crop&q=80",
+    image: "/2.png",
     subcategories: ["Todos", "Papas & Yucas", "Aperitivos", "Ensaladas"],
   },
   {
@@ -60,7 +60,7 @@ export const CATEGORIES: Category[] = [
     name: "Hamburguesas",
     emoji: "🍔",
     shortDesc: "Hamburguesas artesanas a la parrilla con queso fundido y tocino",
-    image: "/src/assets/images/hamburguesa_flamas_artesanal_1793062337268.jpg",
+    image: "/2.png",
     subcategories: ["Todos", "Monster Doble", "Clásicas", "Pollo Crispy"],
   },
   {
@@ -68,7 +68,7 @@ export const CATEGORIES: Category[] = [
     name: "Alitas",
     emoji: "🍗",
     shortDesc: "Alitas BBQ, picantes, miel y mostaza, parmesano crocante",
-    image: "/src/assets/images/alitas_fuego_parrilla_1793062338356.jpg",
+    image: "/2.png",
     subcategories: ["Todos", "BBQ Ahumada", "Fuego Picante", "Miel & Mostaza", "Parmesano"],
   },
   {
@@ -76,7 +76,7 @@ export const CATEGORIES: Category[] = [
     name: "Costillas",
     emoji: "🍖",
     shortDesc: "Costillitas de cerdo tiernas bañadas en salsa barbacoa a la leña",
-    image: "/src/assets/images/costillas_bbq_lena_1793062337065.jpg",
+    image: "/2.png",
     subcategories: ["Todos", "Costillas BBQ", "Miel & Bourbon", "Al Chimichurri"],
   },
   {
