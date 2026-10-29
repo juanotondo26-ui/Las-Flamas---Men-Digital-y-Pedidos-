@@ -4,7 +4,7 @@ export const RESTAURANT_INFO = {
   name: "Las Flamas",
   slogan: "Siente el calor, saborea la pasión",
   logo: "/assets/aistudio/logo_a3acb46e.jpg",
-  heroImage: "/src/assets/images/hero_combo_flamas_familiar_1793062336542.jpg",
+  heroImage: "/3.png",
   whatsappNumber: "+59172877666",
   whatsappDisplay: "72877666",
   address: "Av. Las Américas 131",
